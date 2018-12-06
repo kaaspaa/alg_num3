@@ -5,9 +5,6 @@ import java.util.Random;
 import state_class.State;
 
 public class Mcarlo {
-	//0 - niezdecydowany
-	//1 - NIE
-	//2 - TAK
 	public int decizion;
 	public int numOfIteration;
 
@@ -15,13 +12,14 @@ public class Mcarlo {
 		numOfIteration = n;
 	}
 
-	public State[] createMcarlo(int N, int Y) {
-		State[] arr = new State[N];
+	public State[] createMcarlo(State[] arr, int Y, int N) {
 
-		for(int i=0;i<Y;i++)
+		for(int i = 0;i<Y;i++)
 			arr[i] = State.YES;
-		for(int j=Y;j<N;j++)
-			arr[j] = State.NO;
+		for(int j = 0;j<N;j++)
+			arr[Y + j] = State.NO;
+		for(int l = N + Y;l<arr.length;l++)
+			arr[l] = State.UNDECIDED;
 
 		return arr;
 	}
@@ -35,7 +33,7 @@ public class Mcarlo {
 		}
 		if(allAgents[0] == State.YES)
 			countYes++;
-		probability = (double)countYes/numOfIteration;
+		probability = (double)countYes;
 		return probability;
 	}
 
@@ -44,7 +42,6 @@ public class Mcarlo {
 			if(allAgents[0] != allAgents[i])
 				return false;
 		}
-		System.out.println(allAgents[0].toString());
 		return true;
 	}
 

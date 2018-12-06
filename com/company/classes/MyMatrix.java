@@ -28,6 +28,14 @@ public class MyMatrix<T extends Number> {
         this.classType = classType;
     }
 
+    public int GetRowsNumber(){
+        return  rows;
+    }
+
+    public int GetcolumnsNumber(){
+        return columns;
+    }
+
     public T getValue(int rowNo, int columnNo){
         try{
             if(columnNo<0 || rowNo<0)
