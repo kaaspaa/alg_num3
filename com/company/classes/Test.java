@@ -4,10 +4,10 @@ import state_class.State;
 
 public class Test {
 
-	public void McarloTest() {
+	public void McarloTest(int numberOfAgents) {
 		System.out.println("zaczynam test Mcarlo.\n");
 		int iloscProb = 1000000;
-		int iloscAgentow = 3;
+		int iloscAgentow = numberOfAgents;
 		Mcarlo mc = new Mcarlo(iloscProb);
 		int i, l;
 		double prob = 0.0;
@@ -30,12 +30,15 @@ public class Test {
 		}
 	}
 
-	public void GaussTest() {
+	public void GaussTest(int numberOfAgents) {
 		int iloscProb = 1000;
-		int iloscAgentow = 3;
+		int iloscAgentow = numberOfAgents;
 
 		AgentMatrix am = new AgentMatrix(iloscAgentow);
 		int i,l,pom;
+		am.FulfillMatrix();
+
+		am.showMeTheMatrix();
 /*
 		int size = (iloscAgentow + 1) * (iloscAgentow + 2) / 2;
 		int pom;

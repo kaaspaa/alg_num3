@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
 
     	Test mc = new Test();
-    	mc.McarloTest();
+    	//mc.McarloTest(4);
+    	mc.GaussTest(7);
 /*
     	int iloscProb = 1000;
     	int iloscAgentow = 3;

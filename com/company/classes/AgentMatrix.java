@@ -23,23 +23,80 @@ public class AgentMatrix {
 		//wypelnianie zerami
 		agentMatrix.fillWithZero();
 		vectorB.fillWithZero();
-		vectorB.setValue(sizeOfMatrix,0, 1.0);
+		vectorB.setValue(sizeOfMatrix-1,0, 1.0);
 
 	}
 
-	public void FulfillMatrix(MyMatrix<T> matrix) {
-		for(int i=0;i<=numberOfAgent;i++) {
-			for(int l=0;l<=numberOfAgent-i;l++){
-				//TODO wymyslec cos co mi policzy i wstawi
+	public int getSizeOfMatrix(){
+		return sizeOfMatrix;
+	}
 
+	public void showMeTheMatrix(){
+		for (int i=0;i<sizeOfMatrix;i++) {
+			for (int l = 0; l < sizeOfMatrix; l++) {
+				System.out.print(agentMatrix.getValue(i,l) + ", ");
+			}
+			System.out.println();
+		}
+	}
+
+	public void FulfillMatrix() {
+		int numberOfY=0,numberOfN=0;
+		for(int pom=0;pom<sizeOfMatrix;pom++){
+//			for(int pom2=0;pom2<sizeOfMatrix;pom2++)
+				SetAgentMatrixValue(pom, numberOfY, numberOfN);
+			numberOfN++;
+			if(numberOfN > numberOfAgent - numberOfY){
+				numberOfN=0;
+				numberOfY++;
 			}
 		}
 	}
 
-	public void SetAgentMatrixValue(){
+	public void SetAgentMatrixValue(int index1, int y, int n) {
+		int u = numberOfAgent - y - n;
+		double moreY = ((double) y / (double) numberOfAgent) * ((Double.valueOf(numberOfAgent - y - n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(numberOfAgent - y - n)) / numberOfAgent) * ((double) y / (double) (numberOfAgent - 1));
+		double moreN = ((double) n / (double) numberOfAgent) * ((Double.valueOf(numberOfAgent - y - n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(numberOfAgent - y - n)) / numberOfAgent) * ((double) n / (double) (numberOfAgent - 1));
+		double moreU = ((double) y / (double) numberOfAgent) * ((Double.valueOf(n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(n)) / numberOfAgent) * ((double) y / (double) (numberOfAgent - 1));
+		double stays = 1.0 - moreN - moreU - moreY;
+		if (stays < 0.00000000000001)
+			stays = 0;
+		System.out.println("dla P(" + y + "," + n + ")");
+		System.out.println("N - " + moreN + " Y - " + moreY + " U - " + moreU + " stays - " + stays);
+
+		int index2 = 0;
+		for (int i=0;i<=numberOfAgent;i++){
+			for (int l = 0;l<=numberOfAgent-i;l++){
+				ConditionSet(index1, index2, y, n, i, l, moreY, moreN, moreU, stays);
+				index2++;
+			}
+		}
+//		ConditionSet(index1, index2, y, n, moreY, moreN, moreU, stays);
+//		ConditionSet(index, index + 1, moreN);
+//		ConditionSet(index, index + (numberOfAgent - y - n) + 1, moreY);
+//		if (y != 0 || n != 0)
+//			ConditionSet(index, index - (numberOfAgent + y + n) + 1, moreU);
+
 
 	}
 
-
+	public void ConditionSet(int index1, int index2, int y, int n, int currY, int currN, double moreY, double moreN, double moreU, double stays){
+		if(y == numberOfAgent && n == 0 && index2 == index1)
+			agentMatrix.setValue(index1,index2,1.0);
+		else if(y == 0 && n == numberOfAgent && index1 == index2)
+			agentMatrix.setValue(index1,index2,1.0);
+		else if(y == 0 && n == 0 && index1 == index2)
+			agentMatrix.setValue(index1,index2,1.0);
+		else if(y == currY && n == currN)
+			agentMatrix.setValue(index1,index2,-1.0 + stays);
+		else if(y == currY && n == currN - 1)
+			agentMatrix.setValue(index1,index2, moreN);
+		else if(y == currY - 1 && n == currN)
+			agentMatrix.setValue(index1,index2, moreY);
+		else if(y == currY + 1 && n == currN + 1)
+			agentMatrix.setValue(index1,index2, moreU);
+		else
+			agentMatrix.setValue(index1,index2,0.0);
+	}
 
 }
