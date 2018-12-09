@@ -9,8 +9,14 @@ public class Main {
     	MyMatrix<Double> gaussResults = new MyMatrix<Double>(Double.class,((n+1)*(n+2))/2,1);
     	Test mc = new Test();
     	System.out.println("Mcarlo:\n");
-    	mc.McarloTest(n);
+    	mCarloResults = mc.McarloTest(n);
 		System.out.println("Gauss:\n");
+		gaussResults = mc.GetGaussVector(n);
+		try {
+			mc.mCarloCompareToFile(mCarloResults,gaussResults);
+		} catch (Exception e){
+			System.out.println("Błąd przy zapisie do pliku: " + e);
+		}
     	mc.GaussTest(n);
 
     }

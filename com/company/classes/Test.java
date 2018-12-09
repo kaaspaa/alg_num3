@@ -2,11 +2,15 @@ package classes;
 
 import state_class.State;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Test {
 
 	public MyMatrix<Double> McarloTest(int numberOfAgents) {
 		System.out.println("zaczynam test Mcarlo.\n");
-		int iloscProb = 10000000;
+		int iloscProb = 1000000;
 		int iloscAgentow = numberOfAgents;
 		Mcarlo mc = new Mcarlo(iloscProb);
 		int i, l;
@@ -43,5 +47,38 @@ public class Test {
 
 		double avgValue = am.GetAvgValue(am.CountResultVector());
 
+	}
+
+	public MyMatrix<Double> GetGaussVector(int numberOfAgents) {
+		int iloscAgentow = numberOfAgents;
+
+		AgentMatrix am = new AgentMatrix(iloscAgentow);
+		am.FulfillMatrix();
+
+		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2);
+		resultVector = am.CountResultVector();
+		return resultVector;
+	}
+
+	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector) throws IOException {
+		FileWriter fileWriter = new FileWriter("mCarloPorownanie.cvs");
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+
+		printWriter.print("Mcarlo;\n");
+		for (int i=0;i<mCarloVector.rows;i++){
+			for (int l=0;l<mCarloVector.columns;l++) {
+				printWriter.print(mCarloVector.getValue(i,l ) + ";");
+			}
+			printWriter.println();
+		}
+
+
+		printWriter.print("\nGauss;\n");
+		for (int i=0;i<gaussVector.rows;i++){
+			for (int l=0;l<gaussVector.columns;l++) {
+				printWriter.print(gaussVector.getValue(i,l ) + ";");
+			}
+			printWriter.println();
+		}
 	}
 }
