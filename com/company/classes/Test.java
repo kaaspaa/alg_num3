@@ -4,9 +4,9 @@ import state_class.State;
 
 public class Test {
 
-	public void McarloTest(int numberOfAgents) {
+	public MyMatrix<Double> McarloTest(int numberOfAgents) {
 		System.out.println("zaczynam test Mcarlo.\n");
-		int iloscProb = 1000000;
+		int iloscProb = 10000000;
 		int iloscAgentow = numberOfAgents;
 		Mcarlo mc = new Mcarlo(iloscProb);
 		int i, l;
@@ -28,10 +28,11 @@ public class Test {
 				pom++;
 			}
 		}
+		return vectorX;
 	}
 
 	public void GaussTest(int numberOfAgents) {
-		int iloscProb = 1000;
+//		int iloscProb = 1000;
 		int iloscAgentow = numberOfAgents;
 
 		AgentMatrix am = new AgentMatrix(iloscAgentow);
@@ -39,17 +40,8 @@ public class Test {
 		am.FulfillMatrix();
 
 		am.showMeTheMatrix();
-/*
-		int size = (iloscAgentow + 1) * (iloscAgentow + 2) / 2;
-		int pom;
-		MyMatrix<Double> matrix = new MyMatrix<Double>(Double.class,size);
-		MyMatrix<Double> vectorB = new MyMatrix<Double>(Double.class,size,1);
-//ustawianie wektora B
-		for (pom=0;pom<size;pom++){
-			vectorB.setValue(pom,0,0.0);
-		}
-		vectorB.setValue(size-1,0,1.0);
 
-		*/
+		double avgValue = am.GetAvgValue(am.CountResultVector());
+
 	}
 }

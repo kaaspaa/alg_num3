@@ -59,8 +59,8 @@ public class AgentMatrix {
 		double moreN = ((double) n / (double) numberOfAgent) * ((Double.valueOf(numberOfAgent - y - n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(numberOfAgent - y - n)) / numberOfAgent) * ((double) n / (double) (numberOfAgent - 1));
 		double moreU = ((double) y / (double) numberOfAgent) * ((Double.valueOf(n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(n)) / numberOfAgent) * ((double) y / (double) (numberOfAgent - 1));
 		double stays = 1.0 - moreN - moreU - moreY;
-		if (stays < 0.00000000000001)
-			stays = 0;
+//		if (stays < 0.00000000000001)
+//			stays = 0;
 		System.out.println("dla P(" + y + "," + n + ")");
 		System.out.println("N - " + moreN + " Y - " + moreY + " U - " + moreU + " stays - " + stays);
 
@@ -71,12 +71,6 @@ public class AgentMatrix {
 				index2++;
 			}
 		}
-//		ConditionSet(index1, index2, y, n, moreY, moreN, moreU, stays);
-//		ConditionSet(index, index + 1, moreN);
-//		ConditionSet(index, index + (numberOfAgent - y - n) + 1, moreY);
-//		if (y != 0 || n != 0)
-//			ConditionSet(index, index - (numberOfAgent + y + n) + 1, moreU);
-
 
 	}
 
@@ -99,4 +93,23 @@ public class AgentMatrix {
 			agentMatrix.setValue(index1,index2,0.0);
 	}
 
+	public MyMatrix<Double> CountResultVector(){
+		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+		resultVector = agentMatrix.partialChoiseGauss(agentMatrix, vectorB);
+
+		System.out.println("Result Matrix");
+		resultVector.printMatrix();
+
+		return resultVector;
+	}
+
+	public double GetAvgValue(MyMatrix<Double> matrix){
+		double avgValue=0.0;
+		for(int i=0;i<matrix.columns;i++){
+			for(int l=0;l<matrix.rows;l++){
+				avgValue = avgValue + matrix.getValue(l,i);
+			}
+		}
+		return avgValue;
+	}
 }

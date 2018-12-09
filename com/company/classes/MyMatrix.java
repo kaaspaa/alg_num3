@@ -501,4 +501,10 @@ public class MyMatrix<T extends Number> {
 
 
     }
+
+    public MyMatrix<T> mMultXEqual(MyMatrix<T> matrix, MyMatrix<T> vectorX, MyMatrix<T> resultVector){
+    	for(int i=0;i<matrix.columns;i++){
+        }
+        return resultVector;
+    }
 }
