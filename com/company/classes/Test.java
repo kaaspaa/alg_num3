@@ -60,8 +60,20 @@ public class Test {
 		return resultVector;
 	}
 
+	public void JacobiTest(int numberOfAgents) {
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
+		j.FulfillMatrix();
+
+		j.showMeTheMatrix();
+
+		j.FulfillMatrix();
+	}
+
 	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector) throws IOException {
-		FileWriter fileWriter = new FileWriter("mCarloPorownanie.cvs");
+		FileWriter fileWriter = new FileWriter("mCarloPorownanie.csv");
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 
 		printWriter.print("Mcarlo;\n");
@@ -80,5 +92,16 @@ public class Test {
 			}
 			printWriter.println();
 		}
+
+		/*
+		printWriter.println("\nJacobi\n");
+		for (int i=0;i<jacobiVector.rows;i++){
+			for (int l=0;l<jacobiVector.columns;l++) {
+				printWriter.print(jacobiVector.getValue(i,l ) + ";");
+			}
+			printWriter.println();
+		}
+		printWriter.close();
+		*/
 	}
 }

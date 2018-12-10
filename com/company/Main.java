@@ -4,7 +4,7 @@ import state_class.State;
 public class Main {
 
     public static void main(String[] args) {
-		int n = 15;
+		int n = 6;
     	MyMatrix<Double> mCarloResults = new MyMatrix<Double>(Double.class,((n+1)*(n+2))/2,1);
     	MyMatrix<Double> gaussResults = new MyMatrix<Double>(Double.class,((n+1)*(n+2))/2,1);
     	Test mc = new Test();
