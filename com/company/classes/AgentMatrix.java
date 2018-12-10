@@ -97,7 +97,7 @@ public class AgentMatrix {
 		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
 		resultVector = agentMatrix.partialChoiseGauss(agentMatrix, vectorB);
 
-		System.out.println("Result Matrix");
+		System.out.println("Result Gauss Matrix");
 		resultVector.printMatrix();
 
 		return resultVector;

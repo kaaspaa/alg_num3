@@ -1,12 +1,12 @@
 package classes;
 
+import java.util.Vector;
+
 public class Jacobi {
 	private MyMatrix<Double> matrixA;
-	private MyMatrix<Double> matrixM;
 	private MyMatrix<Double> resultVector;
-	private double N[];
-	private double b[];
-	private double x[];
+	private double vevtorB[];
+	private double prev[];
 	private int sizeOfMatrix;
 	private int numberOfAgents;
 	private int iterCount;
@@ -17,15 +17,14 @@ public class Jacobi {
 		sizeOfMatrix = ((numberOfAgents+1)*(numberOfAgents+2))/2;
 
 		matrixA = new MyMatrix<Double>(Double.class,sizeOfMatrix);
-		matrixM = new MyMatrix<Double>(Double.class,sizeOfMatrix);
 		resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
 
-		N = new double[sizeOfMatrix];
-		b = new double[sizeOfMatrix];
-		x = new double[sizeOfMatrix];
+		vevtorB = new double[sizeOfMatrix];
+		prev = new double[sizeOfMatrix];
 	}
 
 	public void showMeTheMatrix(){
+		System.out.println("Jacobi matrix:");
 		for (int i=0;i<sizeOfMatrix;i++) {
 			for (int l = 0; l < sizeOfMatrix; l++) {
 				System.out.print(matrixA.getValue(i,l) + ", ");
@@ -56,8 +55,8 @@ public class Jacobi {
 		double stays = 1.0 - moreN - moreU - moreY;
 //		if (stays < 0.00000000000001)
 //			stays = 0;
-		System.out.println("dla P(" + y + "," + n + ")");
-		System.out.println("N - " + moreN + " Y - " + moreY + " U - " + moreU + " stays - " + stays);
+//		System.out.println("dla P(" + y + "," + n + ")");
+//		System.out.println("N - " + moreN + " Y - " + moreY + " U - " + moreU + " stays - " + stays);
 
 		int index2 = 0;
 		for (int i=0;i<=numberOfAgents;i++){
@@ -89,45 +88,39 @@ public class Jacobi {
 	}
 
 	public void getValuesOfB() {
-		for(int i=0;i<sizeOfMatrix-1;i++){
-			b[i] = 0.0;
-		}
-		b[sizeOfMatrix-1] = 1.0;
-	}
-
-	public void calculateN() {
-		for (int i=0;i<sizeOfMatrix;i++)
-			N[i] = 1/matrixA.getValue(i,i);
-	}
-
-	public void calculateM() {
 		for(int i=0;i<sizeOfMatrix;i++){
-			for(int l=0;l<sizeOfMatrix;l++){
-				if(i==l)
-					matrixM.setValue(l,i,0.0);
-				else
-					matrixM.setValue(l,i,-1.0 * (matrixA.getValue(l,i) * N[i]));
-			}
+			vevtorB[i] = 0.0;
 		}
+		vevtorB[sizeOfMatrix-1] = 1.0;
 	}
 
-	public void countResultVector() {
+	public MyMatrix<Double> countJacobiResultVector() {
+		FulfillMatrix();
+		getValuesOfB();
+
 		int pom;
-		//x1:
-		for(pom=0;pom<sizeOfMatrix;pom++)
-			resultVector.setValue(pom,0,0.0);
-		//x2:
+		for(pom=0;pom<sizeOfMatrix;pom++) {
+			resultVector.setValue(pom, 0, 0.0);
+			prev[pom] = 0.0;
+		}
 		for(int q=0;q<iterCount;q++){
 			for(pom=0;pom<sizeOfMatrix;pom++){
-				x[pom] = N[pom]*b[pom];
+				resultVector.setValue(pom,0,vevtorB[pom]);
 				for(int j=0;j<sizeOfMatrix;j++){
-					x[pom] = x[pom] + matrixM.getValue(j,pom) * resultVector.getValue(j,0);
+					if(pom != j)
+						resultVector.setValue(pom,0,resultVector.getValue(pom,0) - (matrixA.getValue(pom,j) * prev[j]));
 				}
+				resultVector.setValue(pom,0,resultVector.getValue(pom,0)/matrixA.getValue(pom,pom));
 			}
 			for (int j=0;j<sizeOfMatrix;j++){
-				resultVector.setValue(j,0,x[j]);
+				prev[j] = resultVector.getValue(j,0);
 			}
 		}
+
+		System.out.println("Wynik Jacobiego");
+		resultVector.printMatrix();
+
+		return resultVector;
 	}
 
 	public MyMatrix<Double> getResultVector(){

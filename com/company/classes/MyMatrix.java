@@ -345,7 +345,6 @@ public class MyMatrix<T extends Number> {
     }
 
     public void printMatrix() {
-        System.out.println("Typ: " + classType.getName() + "\n" + "Macierz:");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 System.out.printf("%26.26s  ", matrix[i][j]);

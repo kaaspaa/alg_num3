@@ -55,7 +55,7 @@ public class Test {
 		AgentMatrix am = new AgentMatrix(iloscAgentow);
 		am.FulfillMatrix();
 
-		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2);
+		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
 		resultVector = am.CountResultVector();
 		return resultVector;
 	}
@@ -69,10 +69,20 @@ public class Test {
 
 		j.showMeTheMatrix();
 
-		j.FulfillMatrix();
 	}
 
-	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector) throws IOException {
+	public MyMatrix<Double> GetJacobiResult(int numberOfAgents) {
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
+		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
+		results = j.countJacobiResultVector();
+		return results;
+
+	}
+
+	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector) throws IOException {
 		FileWriter fileWriter = new FileWriter("mCarloPorownanie.csv");
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 
@@ -93,7 +103,7 @@ public class Test {
 			printWriter.println();
 		}
 
-		/*
+
 		printWriter.println("\nJacobi\n");
 		for (int i=0;i<jacobiVector.rows;i++){
 			for (int l=0;l<jacobiVector.columns;l++) {
@@ -102,6 +112,6 @@ public class Test {
 			printWriter.println();
 		}
 		printWriter.close();
-		*/
+
 	}
 }
