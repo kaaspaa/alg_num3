@@ -7,6 +7,8 @@ public class AgentMatrix {
 	private int sizeOfMatrix;
 	private MyMatrix<Double> agentMatrix;
 	private MyMatrix<Double> vectorB;
+	private MyMatrix<Double> secondB;
+	private MyMatrix<Double> resultVector;
 	private State[] s;
 
 		/*	float moreY = (float(y)/float(N)) * (float(N-y-n) / float(N-1)) + (float(N-y-n)/float(N)) * (float(y)/float(N-1));
@@ -20,10 +22,13 @@ public class AgentMatrix {
 
 		agentMatrix = new MyMatrix<Double>(Double.class,sizeOfMatrix);
 		vectorB = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+		secondB = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+		resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
 		//wypelnianie zerami
 		agentMatrix.fillWithZero();
 		vectorB.fillWithZero();
 		vectorB.setValue(sizeOfMatrix-1,0, 1.0);
+		secondB.fillWithZero();
 
 	}
 
@@ -94,10 +99,9 @@ public class AgentMatrix {
 	}
 
 	public MyMatrix<Double> CountResultVector(){
-		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
 		resultVector = agentMatrix.partialChoiseGauss(agentMatrix, vectorB);
 
-		System.out.println("Result Gauss Matrix");
+		System.out.println("Results Gauss:");
 		resultVector.printMatrix();
 
 		return resultVector;
@@ -112,4 +116,21 @@ public class AgentMatrix {
 		}
 		return avgValue;
 	}
+
+
+	public MyMatrix<Double> CountSecondBGauss(){
+		vectorB.fillWithZero();
+		vectorB.setValue(sizeOfMatrix-1,0, 1.0);
+		FulfillMatrix();
+
+		for(int i=0;i<sizeOfMatrix;i++){
+			for(int l=0;l<sizeOfMatrix;l++){
+				secondB.setValue(l,0,secondB.getValue(l,0) + agentMatrix.getValue(l,i) * resultVector.getValue(l,0));
+			}
+		}
+		System.out.println("Drugie B:\n");
+		secondB.printMatrix();
+		return secondB;
+	}
+
 }

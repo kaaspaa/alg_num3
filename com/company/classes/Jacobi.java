@@ -5,7 +5,8 @@ import java.util.Vector;
 public class Jacobi {
 	private MyMatrix<Double> matrixA;
 	private MyMatrix<Double> resultVector;
-	private double vevtorB[];
+	private MyMatrix<Double> secondB;
+	private double vectorB[];
 	private double prev[];
 	private int sizeOfMatrix;
 	private int numberOfAgents;
@@ -18,8 +19,9 @@ public class Jacobi {
 
 		matrixA = new MyMatrix<Double>(Double.class,sizeOfMatrix);
 		resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+		secondB = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
 
-		vevtorB = new double[sizeOfMatrix];
+		vectorB = new double[sizeOfMatrix];
 		prev = new double[sizeOfMatrix];
 	}
 
@@ -87,16 +89,22 @@ public class Jacobi {
 			matrixA.setValue(index1,index2,0.0);
 	}
 
-	public void getValuesOfB() {
+	public void setValuesOfB() {
 		for(int i=0;i<sizeOfMatrix;i++){
-			vevtorB[i] = 0.0;
+			vectorB[i] = 0.0;
 		}
-		vevtorB[sizeOfMatrix-1] = 1.0;
+		vectorB[sizeOfMatrix-1] = 1.0;
+	}
+
+	public  void setValuesOfSecondB() {
+		for(int i=0;i<sizeOfMatrix;i++)
+			secondB.setValue(i,0,0.0);
 	}
 
 	public MyMatrix<Double> countJacobiResultVector() {
 		FulfillMatrix();
-		getValuesOfB();
+		setValuesOfB();
+		setValuesOfSecondB();
 
 		int pom;
 		for(pom=0;pom<sizeOfMatrix;pom++) {
@@ -105,7 +113,7 @@ public class Jacobi {
 		}
 		for(int q=0;q<iterCount;q++){
 			for(pom=0;pom<sizeOfMatrix;pom++){
-				resultVector.setValue(pom,0,vevtorB[pom]);
+				resultVector.setValue(pom,0,vectorB[pom]);
 				for(int j=0;j<sizeOfMatrix;j++){
 					if(pom != j)
 						resultVector.setValue(pom,0,resultVector.getValue(pom,0) - (matrixA.getValue(pom,j) * prev[j]));
@@ -123,7 +131,14 @@ public class Jacobi {
 		return resultVector;
 	}
 
-	public MyMatrix<Double> getResultVector(){
-		return resultVector;
+	public MyMatrix<Double> countSecondB() {
+		for(int i=0;i<sizeOfMatrix;i++){
+			for(int l=0;l<sizeOfMatrix;l++){
+				secondB.setValue(l,0,secondB.getValue(l,0) + matrixA.getValue(l,i) * resultVector.getValue(l,0));
+			}
+		}
+		System.out.println("Drugie B:\n");
+		secondB.printMatrix();
+		return secondB;
 	}
 }

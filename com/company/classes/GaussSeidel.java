@@ -3,6 +3,7 @@ package classes;
 public class GaussSeidel {
 	private MyMatrix<Double> matrixA;
 	private MyMatrix<Double> resultVector;
+	private MyMatrix<Double> secondB;
 	private int numberOfAgents;
 	private int sizeOfMatrix;
 	private int iterCoaunt;
@@ -16,6 +17,9 @@ public class GaussSeidel {
 
 		matrixA = new MyMatrix<Double>(Double.class,sizeOfMatrix);
 		resultVector = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+		secondB = new MyMatrix<Double>(Double.class,sizeOfMatrix,1);
+
+		secondB.fillWithZero();
 
 		prev = new double[sizeOfMatrix];
 		vectorB = new double[sizeOfMatrix];
@@ -79,7 +83,7 @@ public class GaussSeidel {
 			matrixA.setValue(index1,index2,0.0);
 	}
 
-	public void getValuesOfB() {
+	public void setValuesOfB() {
 		for(int i=0;i<sizeOfMatrix;i++){
 			vectorB[i] = 0.0;
 		}
@@ -88,7 +92,7 @@ public class GaussSeidel {
 
 	public MyMatrix<Double> CountGaussSeidelVector(){
 		FulfillMatrix();
-		getValuesOfB();
+		setValuesOfB();
 
 		for(int i=0;i<sizeOfMatrix;i++) {
 			resultVector.setValue(i, 0, 0.0);
@@ -112,6 +116,17 @@ public class GaussSeidel {
 		System.out.println("Wynik Gaussa - Seidela:");
 		resultVector.printMatrix();
 		return resultVector;
+	}
+
+	public MyMatrix<Double> countSecondB() {
+		for(int i=0;i<sizeOfMatrix;i++){
+			for(int l=0;l<sizeOfMatrix;l++){
+				secondB.setValue(l,0,secondB.getValue(l,0) + matrixA.getValue(l,i) * resultVector.getValue(l,0));
+			}
+		}
+		System.out.println("Drugie B:\n");
+		secondB.printMatrix();
+		return secondB;
 	}
 
 }

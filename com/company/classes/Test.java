@@ -35,20 +35,6 @@ public class Test {
 		return vectorX;
 	}
 
-	public void GaussTest(int numberOfAgents) {
-//		int iloscProb = 1000;
-		int iloscAgentow = numberOfAgents;
-
-		AgentMatrix am = new AgentMatrix(iloscAgentow);
-		int i,l,pom;
-		am.FulfillMatrix();
-
-		am.showMeTheMatrix();
-
-		double avgValue = am.GetAvgValue(am.CountResultVector());
-
-	}
-
 	public MyMatrix<Double> GetGaussVector(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
 
@@ -60,24 +46,15 @@ public class Test {
 		return resultVector;
 	}
 
-	public void JacobiTest(int numberOfAgents) {
+	public MyMatrix<Double> CountSecondBGauss(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
-		int iloscProb = 200;
 
-		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
-		j.FulfillMatrix();
+		AgentMatrix am = new AgentMatrix(iloscAgentow);
+		am.FulfillMatrix();
 
-		j.showMeTheMatrix();
-
-	}
-
-	public MyMatrix<Double> GetJacobiResult(int numberOfAgents) {
-		int iloscAgentow = numberOfAgents;
-		int iloscProb = 200;
-
-		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
 		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
-		results = j.countJacobiResultVector();
+		am.CountResultVector();
+		results = am.CountSecondBGauss();
 		return results;
 	}
 
@@ -90,6 +67,40 @@ public class Test {
 		results = gs.CountGaussSeidelVector();
 		return results;
 	}
+
+	public MyMatrix<Double> CountSecondBGaussSeidel(int numberOfAgents){
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		GaussSeidel gs = new GaussSeidel(iloscAgentow,iloscProb);
+		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
+		gs.CountGaussSeidelVector();
+		results = gs.countSecondB();
+		return results;
+	}
+
+	public MyMatrix<Double> GetJacobiResult(int numberOfAgents) {
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
+		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
+		results = j.countJacobiResultVector();
+		return results;
+	}
+
+	public MyMatrix<Double> CountSecondBJacobi(int numberOfAgents){
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		Jacobi j = new Jacobi(iloscAgentow,iloscProb);
+		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
+		j.countJacobiResultVector();
+		results = j.countSecondB();
+		return results;
+	}
+
+
 
 	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector,MyMatrix<Double> gaussSeidelVector) throws IOException {
 		FileWriter fileWriter = new FileWriter("mCarloPorownanie.csv");
