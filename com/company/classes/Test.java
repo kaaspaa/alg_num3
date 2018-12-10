@@ -79,10 +79,19 @@ public class Test {
 		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
 		results = j.countJacobiResultVector();
 		return results;
-
 	}
 
-	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector) throws IOException {
+	public MyMatrix<Double> GetGaussSeidelResult(int numberOfAgents) {
+		int iloscAgentow = numberOfAgents;
+		int iloscProb = 200;
+
+		GaussSeidel gs = new GaussSeidel(iloscAgentow,iloscProb);
+		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
+		results = gs.CountGaussSeidelVector();
+		return results;
+	}
+
+	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector,MyMatrix<Double> gaussSeidelVector) throws IOException {
 		FileWriter fileWriter = new FileWriter("mCarloPorownanie.csv");
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 
@@ -104,10 +113,19 @@ public class Test {
 		}
 
 
-		printWriter.println("\nJacobi\n");
+		printWriter.print("\nJacobii;\n");
 		for (int i=0;i<jacobiVector.rows;i++){
 			for (int l=0;l<jacobiVector.columns;l++) {
 				printWriter.print(jacobiVector.getValue(i,l ) + ";");
+			}
+			printWriter.println();
+		}
+
+
+		printWriter.print("\nGaussSeidel;\n");
+		for (int i=0;i<gaussSeidelVector.rows;i++){
+			for (int l=0;l<gaussSeidelVector.columns;l++) {
+				printWriter.print(gaussSeidelVector.getValue(i,l ) + ";");
 			}
 			printWriter.println();
 		}
