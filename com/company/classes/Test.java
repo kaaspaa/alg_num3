@@ -102,8 +102,8 @@ public class Test {
 
 
 
-	public void mCarloCompareToFile(MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector,MyMatrix<Double> gaussSeidelVector) throws IOException {
-		FileWriter fileWriter = new FileWriter("mCarloPorownanie.csv");
+	public void mCarloCompareToFile(String fileName, MyMatrix<Double> mCarloVector, MyMatrix<Double> gaussVector, MyMatrix<Double> jacobiVector,MyMatrix<Double> gaussSeidelVector) throws IOException {
+		FileWriter fileWriter = new FileWriter(fileName);
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 
 		printWriter.print("Mcarlo;\n");
@@ -141,6 +141,38 @@ public class Test {
 			printWriter.println();
 		}
 		printWriter.close();
+	}
 
+	public void countAndWriteTimeOfExecition(String fileName, int numberOfAgents) throws IOException {
+		double startTime1, endTime1, startTime2, endTime2, startTime3, endTime3, startTime4, endTime4;
+		FileWriter fileWriter = new FileWriter(fileName);
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+
+		printWriter.println("Mcarlo;Gauss;Jacobi;GaussSeidel;n = " + numberOfAgents + ";");
+
+		for(int q=1;q<=15;q++) {
+			//MCarlo
+			startTime1 = System.nanoTime();
+			McarloTest(numberOfAgents);
+			endTime1 = System.nanoTime();
+			//Gauss
+			startTime2 = System.nanoTime();
+			GetGaussVector(numberOfAgents);
+			CountSecondBGauss(numberOfAgents);
+			endTime2 = System.nanoTime();
+			//Jacobi
+			startTime3 = System.nanoTime();
+			GetJacobiResult(numberOfAgents);
+			CountSecondBJacobi(numberOfAgents);
+			endTime3 = System.nanoTime();
+			//GaussSeidel
+			startTime4 = System.nanoTime();
+			GetGaussSeidelResult(numberOfAgents);
+			CountSecondBGaussSeidel(numberOfAgents);
+			endTime4 = System.nanoTime();
+
+			printWriter.println((endTime1 - startTime1) + ";" + (endTime2 - startTime2) + ";" + (endTime3 - startTime3) + ";" + (endTime4 - startTime4) + ";");
+		}
+		printWriter.close();
 	}
 }

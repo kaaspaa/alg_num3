@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aeb2e0a4-72d9-4a54-b095-4852ccdb8a2f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.~lock.mCarloPorownanie.csv#" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com/company/classes/AgentMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/company/classes/AgentMatrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com/company/classes/GaussSeidel.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/company/classes/GaussSeidel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/com/company/classes/Jacobi.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/company/classes/Jacobi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/company/classes/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/com/company/classes/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mCarloPorownanie.csv" beforeDir="false" afterPath="$PROJECT_DIR$/mCarloPorownanie.csv" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +17,7 @@
     <session id="-486843365">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
@@ -31,57 +26,44 @@
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="2" />
-          <entry key="java" value="34" />
+          <entry key="java" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="2" />
-          <entry key="JAVA" value="34" />
+          <entry key="JAVA" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="10700" />
+          <entry key="java" value="11611" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10700" />
+          <entry key="JAVA" value="11611" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+            <state relative-caret-position="449">
+              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/com/company/classes/MyMatrix.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1290">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1319#1320#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,14 +72,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/com/company/classes/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-330">
-              <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+            <state relative-caret-position="405">
+              <caret line="160" column="44" selection-start-line="160" selection-start-column="44" selection-end-line="160" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1553#1561#0" expanded="true" />
-                <element signature="e#2744#2752#0" expanded="true" />
-                <element signature="e#2906#2914#0" expanded="true" />
-                <element signature="e#2835#2843#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,26 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/com/company/classes/GaussSeidel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
+            <state relative-caret-position="795">
               <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/com/company/classes/AgentMatrix.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="120" column="2" selection-start-line="120" selection-start-column="2" selection-end-line="120" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/com/company/classes/Jacobi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="20" column="70" lean-forward="true" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -148,10 +108,10 @@
         <option value="$PROJECT_DIR$/com/company/classes/Mcarlo.java" />
         <option value="$PROJECT_DIR$/com/company/classes/MyMatrix.java" />
         <option value="$PROJECT_DIR$/com/company/classes/Jacobi.java" />
-        <option value="$PROJECT_DIR$/com/company/classes/Test.java" />
-        <option value="$PROJECT_DIR$/com/company/Main.java" />
         <option value="$PROJECT_DIR$/com/company/classes/GaussSeidel.java" />
         <option value="$PROJECT_DIR$/com/company/classes/AgentMatrix.java" />
+        <option value="$PROJECT_DIR$/com/company/classes/Test.java" />
+        <option value="$PROJECT_DIR$/com/company/Main.java" />
       </list>
     </option>
   </component>
@@ -195,7 +155,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="printmat&#9;PSI&#9;JAVA://classes.MyMatrix#printMatrix&#10;printmatr&#9;PSI&#9;JAVA://classes.MyMatrix#printMatrix&#10;countres&#9;PSI&#9;JAVA://classes.AgentMatrix#CountResultVector&#10;Syst&#9;PSI&#9;JAVA://java.lang.System&#10;sho&#9;PSI&#9;JAVA://classes.Jacobi#showMeTheMatrix" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544484584379" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544538505426" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -237,10 +197,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="465" y="31" width="1421" height="999" extended-state="0" />
+    <frame x="465" y="31" width="1421" height="999" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28769118" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29206118" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -272,13 +232,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/com/company/classes/BezStraty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/System.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -293,52 +246,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com/company/classes/Mcarlo.java">
+    <entry file="file://$PROJECT_DIR$/com/company/classes/AgentMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="405">
+          <caret line="135" selection-start-line="135" selection-end-line="135" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com/company/classes/Jacobi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
+        <state relative-caret-position="-1148">
           <caret line="20" column="70" lean-forward="true" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/company/classes/BezStraty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com/company/classes/MyMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1290">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="660">
+          <caret line="417" column="16" lean-forward="true" selection-start-line="417" selection-start-column="16" selection-end-line="417" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1271#1272#0" expanded="true" />
             <element signature="e#1319#1320#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com/company/classes/Test.java">
+    <entry file="file://$PROJECT_DIR$/com/company/classes/Mcarlo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
-          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1553#1561#0" expanded="true" />
-            <element signature="e#2744#2752#0" expanded="true" />
-            <element signature="e#2906#2914#0" expanded="true" />
-            <element signature="e#2835#2843#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+        <state relative-caret-position="300">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -347,15 +291,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/com/company/classes/GaussSeidel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
+        <state relative-caret-position="795">
           <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com/company/classes/AgentMatrix.java">
+    <entry file="file://$PROJECT_DIR$/com/company/classes/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="120" column="2" selection-start-line="120" selection-start-column="2" selection-end-line="120" selection-end-column="2" />
+        <state relative-caret-position="405">
+          <caret line="160" column="44" selection-start-line="160" selection-start-column="44" selection-end-line="160" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
