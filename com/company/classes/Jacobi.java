@@ -35,10 +35,10 @@ public class Jacobi {
 		}
 	}
 
-	public void FulfillMatrix() {
+	public void fulfillMatrix() {
 		int numberOfY=0,numberOfN=0;
 		for(int pom=0;pom<sizeOfMatrix;pom++){
-			SetAgentMatrixValue(pom, numberOfY, numberOfN);
+			setAgentMatrixValue(pom, numberOfY, numberOfN);
 			numberOfN++;
 			if(numberOfN > numberOfAgents - numberOfY){
 				numberOfN=0;
@@ -49,7 +49,7 @@ public class Jacobi {
 
 	}
 
-	public void SetAgentMatrixValue(int index1, int y, int n) {
+	public void setAgentMatrixValue(int index1, int y, int n) {
 		int u = numberOfAgents - y - n;
 		double moreY = ((double) y / (double) numberOfAgents) * ((Double.valueOf(numberOfAgents - y - n)) / ((double) numberOfAgents - 1.0)) + ((Double.valueOf(numberOfAgents - y - n)) / numberOfAgents) * ((double) y / (double) (numberOfAgents - 1));
 		double moreN = ((double) n / (double) numberOfAgents) * ((Double.valueOf(numberOfAgents - y - n)) / ((double) numberOfAgents - 1.0)) + ((Double.valueOf(numberOfAgents - y - n)) / numberOfAgents) * ((double) n / (double) (numberOfAgents - 1));
@@ -57,20 +57,18 @@ public class Jacobi {
 		double stays = 1.0 - moreN - moreU - moreY;
 //		if (stays < 0.00000000000001)
 //			stays = 0;
-//		System.out.println("dla P(" + y + "," + n + ")");
-//		System.out.println("N - " + moreN + " Y - " + moreY + " U - " + moreU + " stays - " + stays);
 
 		int index2 = 0;
 		for (int i=0;i<=numberOfAgents;i++){
 			for (int l = 0;l<=numberOfAgents - i;l++){
-				ConditionSet(index1, index2, y, n, i, l, moreY, moreN, moreU, stays);
+				conditionSet(index1, index2, y, n, i, l, moreY, moreN, moreU, stays);
 				index2++;
 			}
 		}
 
 	}
 
-	public void ConditionSet(int index1, int index2, int y, int n, int currY, int currN, double moreY, double moreN, double moreU, double stays){
+	public void conditionSet(int index1, int index2, int y, int n, int currY, int currN, double moreY, double moreN, double moreU, double stays){
 		if(y == numberOfAgents && n == 0 && index2 == index1)
 			matrixA.setValue(index1,index2,1.0);
 		else if(y == 0 && n == numberOfAgents && index1 == index2)
@@ -102,7 +100,7 @@ public class Jacobi {
 	}
 
 	public MyMatrix<Double> countJacobiResultVector() {
-		FulfillMatrix();
+		fulfillMatrix();
 		setValuesOfB();
 		setValuesOfSecondB();
 

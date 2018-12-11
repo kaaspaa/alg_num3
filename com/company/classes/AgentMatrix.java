@@ -11,10 +11,6 @@ public class AgentMatrix {
 	private MyMatrix<Double> resultVector;
 	private State[] s;
 
-		/*	float moreY = (float(y)/float(N)) * (float(N-y-n) / float(N-1)) + (float(N-y-n)/float(N)) * (float(y)/float(N-1));
-		float moreN = (float(n)/float(N)) * (float(N-y-n) / float(N-1)) + (float(N-y-n)/float(N)) * (float(n)/float(N-1));
-		float moreU = (float(y)/float(N)) * (float(n)/float(N-1)) + (float(n)/float(N)) * (float(y)/float(N-1));
-		float stays = float(1) - moreY - moreU - moreN;*/
 
 	public AgentMatrix(int N){
 		numberOfAgent = N;
@@ -32,10 +28,6 @@ public class AgentMatrix {
 
 	}
 
-	public int getSizeOfMatrix(){
-		return sizeOfMatrix;
-	}
-
 	public void showMeTheMatrix(){
 		for (int i=0;i<sizeOfMatrix;i++) {
 			for (int l = 0; l < sizeOfMatrix; l++) {
@@ -45,11 +37,10 @@ public class AgentMatrix {
 		}
 	}
 
-	public void FulfillMatrix() {
+	public void fulfillMatrix() {
 		int numberOfY=0,numberOfN=0;
 		for(int pom=0;pom<sizeOfMatrix;pom++){
-//			for(int pom2=0;pom2<sizeOfMatrix;pom2++)
-				SetAgentMatrixValue(pom, numberOfY, numberOfN);
+				setAgentMatrixValue(pom, numberOfY, numberOfN);
 			numberOfN++;
 			if(numberOfN > numberOfAgent - numberOfY){
 				numberOfN=0;
@@ -58,7 +49,7 @@ public class AgentMatrix {
 		}
 	}
 
-	public void SetAgentMatrixValue(int index1, int y, int n) {
+	public void setAgentMatrixValue(int index1, int y, int n) {
 		int u = numberOfAgent - y - n;
 		double moreY = ((double) y / (double) numberOfAgent) * ((Double.valueOf(numberOfAgent - y - n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(numberOfAgent - y - n)) / numberOfAgent) * ((double) y / (double) (numberOfAgent - 1));
 		double moreN = ((double) n / (double) numberOfAgent) * ((Double.valueOf(numberOfAgent - y - n)) / ((double) numberOfAgent - 1.0)) + ((Double.valueOf(numberOfAgent - y - n)) / numberOfAgent) * ((double) n / (double) (numberOfAgent - 1));
@@ -72,14 +63,14 @@ public class AgentMatrix {
 		int index2 = 0;
 		for (int i=0;i<=numberOfAgent;i++){
 			for (int l = 0;l<=numberOfAgent-i;l++){
-				ConditionSet(index1, index2, y, n, i, l, moreY, moreN, moreU, stays);
+				conditionSet(index1, index2, y, n, i, l, moreY, moreN, moreU, stays);
 				index2++;
 			}
 		}
 
 	}
 
-	public void ConditionSet(int index1, int index2, int y, int n, int currY, int currN, double moreY, double moreN, double moreU, double stays){
+	public void conditionSet(int index1, int index2, int y, int n, int currY, int currN, double moreY, double moreN, double moreU, double stays){
 		if(y == numberOfAgent && n == 0 && index2 == index1)
 			agentMatrix.setValue(index1,index2,1.0);
 		else if(y == 0 && n == numberOfAgent && index1 == index2)
@@ -98,7 +89,7 @@ public class AgentMatrix {
 			agentMatrix.setValue(index1,index2,0.0);
 	}
 
-	public MyMatrix<Double> CountResultVector(){
+	public MyMatrix<Double> countResultVector(){
 		resultVector = agentMatrix.partialChoiseGauss(agentMatrix, vectorB);
 
 		System.out.println("Results Gauss:");
@@ -107,7 +98,7 @@ public class AgentMatrix {
 		return resultVector;
 	}
 
-	public double GetAvgValue(MyMatrix<Double> matrix){
+	public double getAvgValue(MyMatrix<Double> matrix){
 		double avgValue=0.0;
 		for(int i=0;i<matrix.columns;i++){
 			for(int l=0;l<matrix.rows;l++){
@@ -118,10 +109,10 @@ public class AgentMatrix {
 	}
 
 
-	public MyMatrix<Double> CountSecondBGauss(){
+	public MyMatrix<Double> countSecondBGauss(){
 		vectorB.fillWithZero();
 		vectorB.setValue(sizeOfMatrix-1,0, 1.0);
-		FulfillMatrix();
+		fulfillMatrix();
 
 		for(int i=0;i<sizeOfMatrix;i++){
 			for(int l=0;l<sizeOfMatrix;l++){

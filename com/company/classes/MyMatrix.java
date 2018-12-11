@@ -1,12 +1,12 @@
 package classes;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.ParameterizedType;
+//import java.io.BufferedReader;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Random;
+//import java.util.Random;
 
 public class MyMatrix<T extends Number> {
     T[][] matrix;
@@ -49,82 +49,6 @@ public class MyMatrix<T extends Number> {
     public void setValue(int rowNo, int columnNo, T value)
     {
         matrix [rowNo][columnNo] = value;
-    }
-
-    //Matrixs have to be the same, return frst matrix
-    public MyMatrix<T> add(MyMatrix<T> secondMatrix) {
-
-        MyMatrix<T> sumMatrix = new MyMatrix<T>(classType, this.rows, this.columns);
-
-
-        if (!(secondMatrix.columns == this.columns && secondMatrix.rows == this.rows && secondMatrix.columns == this.rows)) {
-            return null;
-        }
-
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (classType.equals(Float.class)) {
-
-                    Float sum = this.matrix[i][j].floatValue() + secondMatrix.matrix[i][j].floatValue();
-                    sumMatrix.matrix[i][j] = (T) sum;
-
-                } else {
-                    if (classType.equals(Double.class)) {
-
-                        Double sum = this.matrix[i][j].doubleValue() + secondMatrix.matrix[i][j].doubleValue();
-                        sumMatrix.matrix[i][j] = (T) sum;
-
-                    } else {
-
-                        BezStraty sum = (BezStraty) matrix[i][j];
-                        BezStraty tmp = BezStraty.add(sum,(BezStraty) secondMatrix.matrix[i][j]);
-                        sumMatrix.matrix[i][j] = (T) tmp;
-
-                    }
-                }
-            }
-        }
-        return sumMatrix;
-    }
-
-    //Return new Matrix, rows from first, columns from second matrix
-    public MyMatrix<T> multiply(MyMatrix<T> secondMatrix) {
-        if (!(this.columns == secondMatrix.rows)) {
-            return null;
-        }
-        MyMatrix<T> sumMatrix = new MyMatrix<T>(classType, this.rows, secondMatrix.columns);
-        sumMatrix.fillWithZero();
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                for (int k = 0; k < secondMatrix.columns; k++) {
-
-                    if (classType.equals(Float.class)) {
-                        Float result = sumMatrix.matrix[i][k].floatValue() +
-                                this.matrix[i][j].floatValue() * secondMatrix.matrix[j][k].floatValue();
-                        sumMatrix.matrix[i][k] = (T) result;
-                    } else {
-                        if (classType.equals(Double.class)) {
-                            Double result = sumMatrix.matrix[i][k].doubleValue() +
-                                    this.matrix[i][j].doubleValue() * secondMatrix.matrix[j][k].doubleValue();
-                            sumMatrix.matrix[i][k] = (T) result;
-                        } else {
-                            if (classType.equals(BezStraty.class)) {
-                                BezStraty tmp = (BezStraty) this.matrix[i][j];
-                                BezStraty tmp2 = (BezStraty) secondMatrix.matrix[j][k];
-
-                                BezStraty tmpMultiply = tmp.newInstance();
-                                tmpMultiply.multiply(tmp2);
-                                BezStraty tmp3 = (BezStraty) sumMatrix.matrix[i][k];
-                                tmp3.add(tmpMultiply);
-                                sumMatrix.matrix[i][k] = (T) tmp3;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return sumMatrix;
     }
 
     public MyMatrix<T> gaussBase(MyMatrix<T> matrix, MyMatrix<T> vector) {
@@ -192,13 +116,6 @@ public class MyMatrix<T extends Number> {
                         max = i;
                     }
 
-                } else {
-                    if (classType.equals(BezStraty.class)) {
-                        if (Math.abs(((BezStraty) matrix.matrix[i][p]).returnDoubleFormat()) > Math.abs(((BezStraty) matrix.matrix[max][p]).returnDoubleFormat())) {
-                            max = i;
-                        }
-
-                    }
                 }
             }
         }
@@ -220,18 +137,6 @@ public class MyMatrix<T extends Number> {
                 vector.matrix[i][0] = (T) (Double) (vector.matrix[i][0].doubleValue() - alpha * vector.matrix[p][0].doubleValue());
                 for (int j = p; j < n; j++) {
                     matrix.matrix[i][j] = (T) (Double) (matrix.matrix[i][j].doubleValue() - alpha * matrix.matrix[p][j].doubleValue());
-                }
-            } else {
-                if (classType.equals(BezStraty.class)) {
-                    BezStraty alpha = BezStraty.multiply((BezStraty) matrix.matrix[i][p], BezStraty.flip((BezStraty) matrix.matrix[p][p]));
-                    BezStraty tmp1 = BezStraty.multiply(alpha, (BezStraty) vector.matrix[p][0]);
-                    tmp1 = BezStraty.negate(tmp1);
-                    vector.matrix[i][0] = (T) BezStraty.add((BezStraty) vector.matrix[i][0], tmp1);
-                    for (int j = p; j < n; j++) {
-                        BezStraty tmp2 = BezStraty.multiply(alpha, (BezStraty) matrix.matrix[p][j]);
-                        tmp2 = BezStraty.negate(tmp2);
-                        matrix.matrix[i][j] = (T) BezStraty.add((BezStraty) matrix.matrix[i][j], tmp2);
-                    }
                 }
             }
         }
@@ -256,25 +161,6 @@ public class MyMatrix<T extends Number> {
                     }
                     resultVector.matrix[i][0] = (T) (Double) ((vector.matrix[i][0].doubleValue() - sum) / matrix.matrix[i][i].doubleValue());
 
-                }
-            } else {
-                if (classType.equals(BezStraty.class)) {
-                    for (int i = n - 1; i >= 0; i--) {
-                        BezStraty sum = new BezStraty("0.0");
-                        for (int j = i + 1; j < n; j++) {
-                            BezStraty tmp1 = (BezStraty) matrix.matrix[i][j];
-                            BezStraty tmp2 = (BezStraty) resultVector.matrix[j][0];
-                            tmp1.multiply(tmp2);
-                            sum.add(tmp1);
-                        }
-                        BezStraty tmp3 = (BezStraty) vector.matrix[i][0];
-                        sum = BezStraty.negate(sum);
-                        tmp3.add(sum);
-                        BezStraty tmp4 = (BezStraty) matrix.matrix[i][i];
-                        tmp4 = BezStraty.flip(tmp4);
-                        tmp3.multiply(tmp4);
-                        resultVector.matrix[i][0] = (T) tmp3;
-                    }
                 }
             }
         }
@@ -363,147 +249,9 @@ public class MyMatrix<T extends Number> {
                     if (classType.equals(Double.class)) {
                         Double zero = new Double(0);
                         matrix[i][j] = (T) zero;
-                    } else {
-                        matrix[i][j] = (T) new BezStraty("0.0");
                     }
                 }
             }
         }
-    }
-
-    public BezStraty countAverageValue() {
-        BezStraty sum = new BezStraty("0.0");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-
-                if(classType.equals(Float.class)){
-                    BezStraty value = new BezStraty(String.valueOf(this.matrix[i][j].floatValue()));
-                    sum.add(value);
-                }else{
-                    if(classType.equals(Double.class)){
-                        BezStraty value = new BezStraty(String.valueOf(this.matrix[i][j].doubleValue()));
-                        sum.add(value);
-                    }else{
-                        BezStraty value = (BezStraty) this.matrix[i][j];
-                        sum.add(value);
-                    }
-                }
-
-
-            }
-        }
-        int divider = rows*columns;
-        BezStraty divide = new BezStraty(String.valueOf(divider)+".0");
-        divide = BezStraty.flip(divide);
-         sum.multiply(divide);
-        return sum;
-    }
-
-    public void loadValues(String suffix) throws IOException {
-        FileInputStream fstream = new FileInputStream("values" + suffix + ".txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        loadData(br);
-        br.close();
-        fstream.close();
-    }
-
-    public Double loadValuesWithTime(String suffix, Double time) throws IOException {
-        FileInputStream fstream = new FileInputStream("values" + suffix + ".txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String strLine;
-        time = Double.valueOf(br.readLine());
-        //loadData(br);
-        br.close();
-        fstream.close();
-        return time;
-    }
-    private void loadData(BufferedReader br) throws IOException {
-        String strLine;
-        rows = Integer.valueOf(br.readLine());
-        columns = Integer.parseInt(br.readLine());
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-
-                strLine = br.readLine();
-                if (classType.equals(Float.class)) {
-                    matrix[i][j] = (T) Float.valueOf(strLine);
-                } else {
-                    if (classType.equals(Double.class)) {
-                        matrix[i][j] = (T) Double.valueOf(strLine);
-                    } else {
-                        matrix[i][j] = (T) new BezStraty(strLine);
-                    }
-                }
-            }
-        }
-    }
-
-    public static int loadSize(String suffix) throws IOException {
-        FileInputStream fstream = new FileInputStream("values" + suffix + ".txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String strLine;
-        int size = Integer.valueOf(br.readLine());
-        br.close();
-        fstream.close();
-        return size;
-    }
-    public BezStraty countAverageDiff(MyMatrix<T> vector, MyMatrix<T> result){
-        BezStraty sum = new BezStraty("0.0");
-        if (classType.equals(Float.class)) {
-            Float resultFloat = 0.0f;
-
-            for (int j = 0; j < this.rows; j++) {
-                resultFloat = 0.0f;
-                for (int i = 0; i < this.columns; i++) {
-                    resultFloat += this.matrix[j][i].floatValue() * result.matrix[i][0].floatValue();
-                }
-                sum.add( new BezStraty(String.valueOf(Math.abs(resultFloat - vector.matrix[j][0].floatValue()))));
-            }
-        } else {
-            if (classType.equals(Double.class)) {
-                Double resultFloat = 0.0;
-                for (int j = 0; j < this.rows; j++) {
-                    resultFloat = 0.0;
-                    for (int i = 0; i < this.columns; i++) {
-                        resultFloat += this.matrix[j][i].doubleValue() * result.matrix[i][0].doubleValue();
-                    }
-                    sum.add( new BezStraty(String.valueOf(Math.abs(resultFloat - vector.matrix[j][0].doubleValue()))));
-
-                }
-            } else {
-
-                BezStraty resultMyOwn = new BezStraty("0.0");
-                for (int j = 0; j < this.rows; j++) {
-                    resultMyOwn = new BezStraty("0.0");
-                    for (int i = 0; i < this.columns; i++) {
-                        BezStraty tmp1 = ((BezStraty) this.matrix[j][i]).newInstance();
-                        tmp1 = BezStraty.multiply(tmp1,(BezStraty) result.matrix[i][0]);
-                        resultMyOwn.add(tmp1);
-
-                    }
-                    BezStraty tmp2 = resultMyOwn.newInstance();
-                    BezStraty negateValue = ((BezStraty) vector.matrix[j][0]).newInstance();
-                    negateValue = BezStraty.negate(negateValue);
-                    tmp2.add(negateValue);
-                    BezStraty diff = tmp2;
-                    diff.absConvert();
-                    sum.add(diff);
-                }
-            }
-        }
-        int divider = rows*vector.columns;
-        BezStraty divide = new BezStraty(String.valueOf(divider)+".0");
-        divide = BezStraty.flip(divide);
-        sum.multiply(divide);
-        return sum;
-
-
-    }
-
-    public MyMatrix<T> mMultXEqual(MyMatrix<T> matrix, MyMatrix<T> vectorX, MyMatrix<T> resultVector){
-    	for(int i=0;i<matrix.columns;i++){
-        }
-        return resultVector;
     }
 }

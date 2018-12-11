@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 public class Test {
 
-	public MyMatrix<Double> McarloTest(int numberOfAgents) {
+	public MyMatrix<Double> mCarloTest(int numberOfAgents) {
 		System.out.println("zaczynam test Mcarlo.\n");
 		int iloscProb = 1000000;
 		int iloscAgentow = numberOfAgents;
@@ -35,51 +35,51 @@ public class Test {
 		return vectorX;
 	}
 
-	public MyMatrix<Double> GetGaussVector(int numberOfAgents) {
+	public MyMatrix<Double> getGaussVector(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
 
 		AgentMatrix am = new AgentMatrix(iloscAgentow);
-		am.FulfillMatrix();
+		am.fulfillMatrix();
 
 		MyMatrix<Double> resultVector = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
-		resultVector = am.CountResultVector();
+		resultVector = am.countResultVector();
 		return resultVector;
 	}
 
-	public MyMatrix<Double> CountSecondBGauss(int numberOfAgents) {
+	public MyMatrix<Double> countSecondBGauss(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
 
 		AgentMatrix am = new AgentMatrix(iloscAgentow);
-		am.FulfillMatrix();
+		am.fulfillMatrix();
 
 		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
-		am.CountResultVector();
-		results = am.CountSecondBGauss();
+		am.countResultVector();
+		results = am.countSecondBGauss();
 		return results;
 	}
 
-	public MyMatrix<Double> GetGaussSeidelResult(int numberOfAgents) {
+	public MyMatrix<Double> getGaussSeidelResult(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
-		int iloscProb = 200;
+		int iloscProb = 150;
 
 		GaussSeidel gs = new GaussSeidel(iloscAgentow,iloscProb);
 		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
-		results = gs.CountGaussSeidelVector();
+		results = gs.countGaussSeidelVector();
 		return results;
 	}
 
-	public MyMatrix<Double> CountSecondBGaussSeidel(int numberOfAgents){
+	public MyMatrix<Double> countSecondBGaussSeidel(int numberOfAgents){
 		int iloscAgentow = numberOfAgents;
-		int iloscProb = 200;
+		int iloscProb = 150;
 
 		GaussSeidel gs = new GaussSeidel(iloscAgentow,iloscProb);
 		MyMatrix<Double> results = new MyMatrix<Double>(Double.class,(numberOfAgents+1)*(numberOfAgents+2)/2,1);
-		gs.CountGaussSeidelVector();
+		gs.countGaussSeidelVector();
 		results = gs.countSecondB();
 		return results;
 	}
 
-	public MyMatrix<Double> GetJacobiResult(int numberOfAgents) {
+	public MyMatrix<Double> getJacobiResult(int numberOfAgents) {
 		int iloscAgentow = numberOfAgents;
 		int iloscProb = 200;
 
@@ -89,7 +89,7 @@ public class Test {
 		return results;
 	}
 
-	public MyMatrix<Double> CountSecondBJacobi(int numberOfAgents){
+	public MyMatrix<Double> countSecondBJacobi(int numberOfAgents){
 		int iloscAgentow = numberOfAgents;
 		int iloscProb = 200;
 
@@ -149,26 +149,26 @@ public class Test {
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 
 		printWriter.println("Mcarlo;Gauss;Jacobi;GaussSeidel;n = " + numberOfAgents + ";");
-
-		for(int q=1;q<=15;q++) {
+		
+		for(int q=1;q<=10;q++) {
 			//MCarlo
 			startTime1 = System.nanoTime();
-			McarloTest(numberOfAgents);
+			mCarloTest(numberOfAgents);
 			endTime1 = System.nanoTime();
 			//Gauss
 			startTime2 = System.nanoTime();
-			GetGaussVector(numberOfAgents);
-			CountSecondBGauss(numberOfAgents);
+			getGaussVector(numberOfAgents);
+			countSecondBGauss(numberOfAgents);
 			endTime2 = System.nanoTime();
 			//Jacobi
 			startTime3 = System.nanoTime();
-			GetJacobiResult(numberOfAgents);
-			CountSecondBJacobi(numberOfAgents);
+			getJacobiResult(numberOfAgents);
+			countSecondBJacobi(numberOfAgents);
 			endTime3 = System.nanoTime();
 			//GaussSeidel
 			startTime4 = System.nanoTime();
-			GetGaussSeidelResult(numberOfAgents);
-			CountSecondBGaussSeidel(numberOfAgents);
+			getGaussSeidelResult(numberOfAgents);
+			countSecondBGaussSeidel(numberOfAgents);
 			endTime4 = System.nanoTime();
 
 			printWriter.println((endTime1 - startTime1) + ";" + (endTime2 - startTime2) + ";" + (endTime3 - startTime3) + ";" + (endTime4 - startTime4) + ";");

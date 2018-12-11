@@ -5,7 +5,6 @@ import java.util.Random;
 import state_class.State;
 
 public class Mcarlo {
-	public int decizion;
 	public int numOfIteration;
 
 	public Mcarlo(int n){
@@ -28,8 +27,8 @@ public class Mcarlo {
 		double probability;
 		int countYes=0;
 
-		while(!OneDecizionArray(allAgents)){
-			allAgents = ChangeState(allAgents);
+		while(!oneDecizionArray(allAgents)){
+			allAgents = changeState(allAgents);
 		}
 		if(allAgents[0] == State.YES)
 			countYes++;
@@ -37,7 +36,7 @@ public class Mcarlo {
 		return probability;
 	}
 
-	public boolean OneDecizionArray(State[] allAgents) {
+	public boolean oneDecizionArray(State[] allAgents) {
 		for(int i=1;i<allAgents.length;i++){
 			if(allAgents[0] != allAgents[i])
 				return false;
@@ -45,12 +44,14 @@ public class Mcarlo {
 		return true;
 	}
 
-	public State[] ChangeState(State[] allAgents){
+	public State[] changeState(State[] allAgents){
 		Random rand = new Random();
 		int pickOneNumber = rand.nextInt(allAgents.length);
 		int pickSecondNumber = rand.nextInt(allAgents.length);
+		//jesli sa takie same to losuje drugi numer jeszcze raz
 		while (pickSecondNumber == pickOneNumber)
 			pickSecondNumber = rand.nextInt(allAgents.length);
+
 //jesli 1 -  Y i 2 - N lub 1 - N i 2 - Y
 		if( (allAgents[pickOneNumber] == State.YES && allAgents[pickSecondNumber] == State.NO) ||  (allAgents[pickOneNumber] == State.NO && allAgents[pickSecondNumber] == State.YES) ){
 			allAgents[pickOneNumber] = State.UNDECIDED;
